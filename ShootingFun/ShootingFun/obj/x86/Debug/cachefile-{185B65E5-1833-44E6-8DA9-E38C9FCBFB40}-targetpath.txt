@@ -1,0 +1,3 @@
+Content\background.xnb
+Content\ship.xnb
+Content\GameFont.xnb

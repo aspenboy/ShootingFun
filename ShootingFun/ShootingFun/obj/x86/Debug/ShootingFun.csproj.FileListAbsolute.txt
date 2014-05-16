@@ -1,0 +1,9 @@
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\ShootingFun.exe
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\ShootingFun.pdb
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\ShootingFun.csprojResolveAssemblyReference.cache
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\ShootingFun.exe
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\ShootingFun.pdb
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\background.xnb
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\ship.xnb
+c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\GameFont.xnb
