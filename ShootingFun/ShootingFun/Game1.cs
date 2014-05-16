@@ -20,7 +20,7 @@ namespace ShootingFun
         SpriteBatch spriteBatch;
 
         private Sprite background;
-        private Sprite playerShip;
+        private PlayerShip playerShip;
         private SpriteFont gameFont;
 
         private int score;
@@ -52,13 +52,15 @@ namespace ShootingFun
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = new Sprite(Content.Load<Texture2D>("background"), Vector2.Zero);
+            background = new Sprite(Content.Load<Texture2D>("background"), Vector2.Zero, graphics.GraphicsDevice.Viewport.Bounds);
             
             var shipTexture = Content.Load<Texture2D>("ship");
             var xPosiotionOfShip = graphics.GraphicsDevice.Viewport.Height - shipTexture.Height - 10;
             var yPositionOfShip = (graphics.GraphicsDevice.Viewport.Width / 2) - (shipTexture.Width / 2);
 
-            playerShip = new Sprite(shipTexture, new Vector2(xPosiotionOfShip, yPositionOfShip));
+            var playerBounds = new Rectangle(0, graphics.GraphicsDevice.Viewport.Height - 200, graphics.GraphicsDevice.Viewport.Width, 200);
+
+            playerShip = new PlayerShip(shipTexture, new Vector2(xPosiotionOfShip, yPositionOfShip), playerBounds);
 
             gameFont = Content.Load<SpriteFont>("GameFont");
 
@@ -81,12 +83,10 @@ namespace ShootingFun
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+            var keyboardState = Keyboard.GetState();
+            playerShip.Update(keyboardState, gameTime);
 
-            // TODO: Add your update logic here
-
+ 
             base.Update(gameTime);
         }
 
