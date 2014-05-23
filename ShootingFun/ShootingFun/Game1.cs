@@ -22,8 +22,9 @@ namespace ShootingFun
         private Sprite background;
         private PlayerShip playerShip;
         private SpriteFont gameFont;
+        private EnemyManager enemyManager;
 
-        private int score;
+        private int score = 0;
 
         public Game1()
         {
@@ -39,8 +40,6 @@ namespace ShootingFun
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -54,17 +53,17 @@ namespace ShootingFun
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = new Sprite(Content.Load<Texture2D>("background"), Vector2.Zero, graphics.GraphicsDevice.Viewport.Bounds);
             
-            var shipTexture = Content.Load<Texture2D>("ship");
-            var xPosiotionOfShip = graphics.GraphicsDevice.Viewport.Height - shipTexture.Height - 10;
-            var yPositionOfShip = (graphics.GraphicsDevice.Viewport.Width / 2) - (shipTexture.Width / 2);
+            var shipTexture = Content.Load<Texture2D>("ship1");
+
+            var xPositionOfShip = (graphics.GraphicsDevice.Viewport.Width / 2) - (shipTexture.Width / 2);
+            var yPositionOfShip = graphics.GraphicsDevice.Viewport.Height - shipTexture.Height - 10;
 
             var playerBounds = new Rectangle(0, graphics.GraphicsDevice.Viewport.Height - 200, graphics.GraphicsDevice.Viewport.Width, 200);
+            playerShip = new PlayerShip(shipTexture, new Vector2(xPositionOfShip, yPositionOfShip), playerBounds);
 
-            playerShip = new PlayerShip(shipTexture, new Vector2(xPosiotionOfShip, yPositionOfShip), playerBounds);
+            enemyManager = new EnemyManager(Content.Load<Texture2D>("enemy"), graphics.GraphicsDevice.Viewport.Bounds);
 
             gameFont = Content.Load<SpriteFont>("GameFont");
-
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>

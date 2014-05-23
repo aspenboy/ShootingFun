@@ -2,31 +2,31 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>background.png</Source>
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\background.xnb</Output>
-      <Time>2014-05-16T12:52:55.1397069+02:00</Time>
-    </Item>
-    <Item>
-      <Source>ship.png</Source>
-      <Name>ship</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\ship.xnb</Output>
-      <Time>2014-05-16T14:39:03.2464539+02:00</Time>
-    </Item>
-    <Item>
       <Source>GameFont.spritefont</Source>
       <Name>GameFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\GameFont.xnb</Output>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\GameFont.xnb</Output>
       <Time>2014-05-16T15:57:39.2360057+02:00</Time>
+    </Item>
+    <Item>
+      <Source>background.png</Source>
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2014-05-23T15:59:15.5811261+02:00</Time>
+    </Item>
+    <Item>
+      <Source>ship1.png</Source>
+      <Name>ship1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\ship1.xnb</Output>
+      <Time>2014-05-23T15:59:21.7047384+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -35,10 +35,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFunContent\</RootDirectory>
-      <LoggerRootDirectory>c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\</LoggerRootDirectory>
-      <IntermediateDirectory>c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>c:\users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFunContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

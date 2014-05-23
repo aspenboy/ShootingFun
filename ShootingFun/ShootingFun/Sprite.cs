@@ -13,7 +13,7 @@ namespace ShootingFun
         private readonly Texture2D texture;
         private Vector2 position;
         protected Vector2 Velocity { get; set; }
-        protected float Speed { get; set; }
+        
         private readonly Rectangle movementBounds;
 
 
@@ -21,6 +21,7 @@ namespace ShootingFun
         {
             this.texture = texture;
             this.position = position;
+            this.movementBounds = movementBounds;
         }
 
 
@@ -32,11 +33,36 @@ namespace ShootingFun
 
         public virtual void Update(KeyboardState keyboardState, GameTime gameTime)
         {
-            //UpdateVelocity(keyboardState);
+            var newPosition = position + (Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
-            position += (Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            if (Blocked(newPosition))
+                return;
+
+            position = newPosition;
+            //position += (Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
         }
 
+        private bool Blocked(Vector2 pos)
+        {
+            var boundingBox = CreateBoundingBoxFromPosition(pos);
+            return !movementBounds.Contains(boundingBox);
+        }
+
+        private Rectangle CreateBoundingBoxFromPosition(Vector2 pos)
+        {
+            return new Rectangle((int)pos.X, (int)pos.Y, (int)Width, (int)Height);
+        }
+
+
+        protected float Speed { get; set; }
+
+        public Vector2 Position
+        {
+            get { return position; }
+        }
+
+        public float Width { get { return texture.Width; } }
+        public float Height { get { return texture.Height; } }
 
     }
 }
