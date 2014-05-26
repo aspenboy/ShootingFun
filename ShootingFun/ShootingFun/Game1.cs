@@ -23,6 +23,8 @@ namespace ShootingFun
         private PlayerShip playerShip;
         private SpriteFont gameFont;
         private EnemyManager enemyManager;
+        private ShotManager shotManager;
+        private CollisionManager collisionManager;
 
         private int score = 0;
 
@@ -54,14 +56,15 @@ namespace ShootingFun
             background = new Sprite(Content.Load<Texture2D>("background"), Vector2.Zero, graphics.GraphicsDevice.Viewport.Bounds);
             
             var shipTexture = Content.Load<Texture2D>("ship1");
-
             var xPositionOfShip = (graphics.GraphicsDevice.Viewport.Width / 2) - (shipTexture.Width / 2);
             var yPositionOfShip = graphics.GraphicsDevice.Viewport.Height - shipTexture.Height - 10;
-
             var playerBounds = new Rectangle(0, graphics.GraphicsDevice.Viewport.Height - 200, graphics.GraphicsDevice.Viewport.Width, 200);
-            playerShip = new PlayerShip(shipTexture, new Vector2(xPositionOfShip, yPositionOfShip), playerBounds);
+            shotManager = new ShotManager(Content.Load<Texture2D>("shot"), graphics.GraphicsDevice.Viewport.Bounds);
+            playerShip = new PlayerShip(shipTexture, new Vector2(xPositionOfShip, yPositionOfShip), playerBounds, shotManager);
+            
+            enemyManager = new EnemyManager(Content.Load<Texture2D>("enemy"), graphics.GraphicsDevice.Viewport.Bounds, shotManager);
+            collisionManager = new CollisionManager(playerShip, shotManager, enemyManager);
 
-            enemyManager = new EnemyManager(Content.Load<Texture2D>("enemy"), graphics.GraphicsDevice.Viewport.Bounds);
 
             gameFont = Content.Load<SpriteFont>("GameFont");
         }
@@ -82,11 +85,22 @@ namespace ShootingFun
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            var keyboardState = Keyboard.GetState();
-            playerShip.Update(keyboardState, gameTime);
+            //var keyboardState = Keyboard.GetState();
+            playerShip.Update(gameTime);
+            enemyManager.Update(gameTime);
+            shotManager.Update(gameTime);
 
+            collisionManager.Update(gameTime);
+
+            UpdateScore();
  
             base.Update(gameTime);
+        }
+
+        private void UpdateScore()
+        {
+            var kills = enemyManager.GetKillCount();
+            score += (kills * 1000);
         }
 
         /// <summary>
@@ -99,7 +113,10 @@ namespace ShootingFun
 
             spriteBatch.Begin();
             background.Draw(spriteBatch);
-            playerShip.Draw(spriteBatch);
+            if (!playerShip.IsDead)
+                playerShip.Draw(spriteBatch);
+            enemyManager.Draw(spriteBatch);
+            shotManager.Draw(spriteBatch);
 
             var scoreText = string.Format("Score: {0}", score);
             var scoreDimensions = gameFont.MeasureString(scoreText);
@@ -108,11 +125,6 @@ namespace ShootingFun
             var scoreY = 5;
 
             spriteBatch.DrawString(gameFont, scoreText, new Vector2(scoreX, scoreY), Color.White);
-
-            //spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            //var xPosiotionOfShip = graphics.GraphicsDevice.Viewport.Height - playerShip.Height - 10;
-            //var yPositionOfShip = (graphics.GraphicsDevice.Viewport.Width / 2) - (playerShip.Width / 2);
-            //spriteBatch.Draw(playerShip, new Vector2(xPosiotionOfShip, yPositionOfShip), Color.White);
 
             spriteBatch.End();
 

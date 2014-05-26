@@ -9,14 +9,46 @@ namespace ShootingFun
     public class PlayerShip : Sprite
     {
         private MouseState previousMousePosition;
+        //private Texture2D shipTexture;
+        //private Vector2 vector2;
+        //private Rectangle playerBounds;
+        private ShotManager shotManager;
+        private const double TimeBetweenShotsInSeconds = 1;
+        private double timeSinceLastFireInSeconds = 0;
         
 
-        public PlayerShip(Texture2D texture, Vector2 position, Rectangle movementBounds)
+        public PlayerShip(Texture2D texture, Vector2 position, Rectangle movementBounds, ShotManager shotManager)
             : base(texture, position, movementBounds)
         {
+            this.shotManager = shotManager;
             Speed = 300;
         }
 
+        private void HandleKeyboardInput()
+        {
+            var keyboardState = Keyboard.GetState();
+            UpdateVelocityFromKeyboard(keyboardState);
+            CheckForShotFromKeyboard(keyboardState);
+        }
+
+        private void CheckForShotFromKeyboard(KeyboardState keyboardState)
+        {
+            if (keyboardState.IsKeyDown(Keys.Space) && CanFireShot())
+            {
+                shotManager.FirePlayerShot(CalculateShotPosition());
+                timeSinceLastFireInSeconds = 0;
+            }
+        }
+
+        private bool CanFireShot()
+        {
+            return (timeSinceLastFireInSeconds > TimeBetweenShotsInSeconds) && !IsDead;
+        }
+
+        private Vector2 CalculateShotPosition()
+        {
+            return Position + new Vector2(Width / 2, 0);
+        }
 
         private void UpdateVelocityFromKeyboard(KeyboardState keyboardState)
         {
@@ -39,12 +71,7 @@ namespace ShootingFun
             if (velocity != Vector2.Zero)
                 velocity.Normalize();
 
-            //foreach (var keypress in keyboardState.GetPressedKeys())
-            //{
-            //    velocity += keyDictionary[keypress];
-            //}
-
-            Velocity = velocity * Speed;
+            Velocity = velocity;
         }
 
 
@@ -54,17 +81,25 @@ namespace ShootingFun
             if (velocity != Vector2.Zero)
                 velocity.Normalize();
 
-            Velocity = velocity * Speed;
+            Velocity = velocity;
 
             previousMousePosition = Mouse.GetState();
         }
 
 
-        public override void Update(KeyboardState keyboardState, GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            UpdateVelocityFromKeyboard(keyboardState);
+            timeSinceLastFireInSeconds += gameTime.ElapsedGameTime.TotalSeconds;
+            HandleKeyboardInput();
             //UpdateVelocityFromMouse();
-            base.Update(keyboardState, gameTime);
+            base.Update(gameTime);
         }
+
+        public void Hit()
+        {
+            IsDead = true;
+        }
+
+        public bool IsDead { get; private set; }
     }
 }

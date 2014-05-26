@@ -12,7 +12,7 @@ namespace ShootingFun
     {
         private readonly Texture2D texture;
         private Vector2 position;
-        protected Vector2 Velocity { get; set; }
+        public Vector2 Velocity { get; set; }
         
         private readonly Rectangle movementBounds;
 
@@ -24,16 +24,14 @@ namespace ShootingFun
             this.movementBounds = movementBounds;
         }
 
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);
         }
 
-
-        public virtual void Update(KeyboardState keyboardState, GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
-            var newPosition = position + (Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            var newPosition = position + ((Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds) * Speed);
 
             if (Blocked(newPosition))
                 return;
@@ -53,7 +51,6 @@ namespace ShootingFun
             return new Rectangle((int)pos.X, (int)pos.Y, (int)Width, (int)Height);
         }
 
-
         protected float Speed { get; set; }
 
         public Vector2 Position
@@ -63,6 +60,11 @@ namespace ShootingFun
 
         public float Width { get { return texture.Width; } }
         public float Height { get { return texture.Height; } }
+
+        public Rectangle BoundingBox
+        {
+            get { return CreateBoundingBoxFromPosition(position); }
+        }
 
     }
 }

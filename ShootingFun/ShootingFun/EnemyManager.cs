@@ -12,19 +12,22 @@ namespace ShootingFun
         private readonly Texture2D texture;
         private readonly Rectangle bounds;
         private List<Enemy> enemies = new List<Enemy>();
+        private Texture2D texture2D;
+        private Rectangle rectangle;
+        private ShotManager shotManager;
 
-        public EnemyManager(Texture2D texture, Rectangle bounds)
+        public EnemyManager(Texture2D texture, Rectangle bounds, ShotManager shotManager)
         {
             this.texture = texture;
             this.bounds = bounds;
-
+            this.shotManager = shotManager;
             CreateEnemy();
         }
 
         private void CreateEnemy()
         {
             var position = RandomPosition();
-            var enemy = new Enemy(texture, position, bounds);
+            var enemy = new Enemy(texture, position, bounds, shotManager);
             enemies.Add(enemy);
         }
 
@@ -35,6 +38,38 @@ namespace ShootingFun
             return new Vector2(xPosition, 20);
         }
 
-        
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (var enemy in enemies)
+                enemy.Draw(spriteBatch);
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].IsDead)
+                {
+                    enemies.Remove(enemies[i]);
+                    CreateEnemy();
+                }
+                enemies[i].Update(gameTime);
+            }
+            
+            foreach (var enemy in enemies)
+            {
+                enemy.Update(gameTime);
+            }
+        }
+
+        public IEnumerable<Enemy> Enemies
+        {
+            get { return enemies; }
+        }
+
+        internal int GetKillCount()
+        {
+            return enemies.Where(e => e.IsDead).Count();
+        }
     }
 }
