@@ -33,7 +33,7 @@ namespace ShootingFun
             get { return enemyShots; }
         }
 
-        public IEnumerable<Shot> PlayerShots
+        public IList<Shot> PlayerShots
         {
             get { return playerShots; }
         }
@@ -79,6 +79,11 @@ namespace ShootingFun
         public void FirePlayerShot(Vector2 shotPosition)
         {
             FireShot(shotPosition, -1, playerShots);
+        }
+
+        public void RemovePlayerShot(Shot shot)
+        {
+            playerShots.Remove(shot);
         }
     }
 }

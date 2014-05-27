@@ -18,7 +18,7 @@ namespace ShootingFun
         
 
         public PlayerShip(Texture2D texture, Vector2 position, Rectangle movementBounds, ShotManager shotManager)
-            : base(texture, position, movementBounds)
+            : base(texture, position, movementBounds, 2, 2, 14)
         {
             this.shotManager = shotManager;
             Speed = 300;

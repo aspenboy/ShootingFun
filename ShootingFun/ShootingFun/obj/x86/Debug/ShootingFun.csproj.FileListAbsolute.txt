@@ -9,3 +9,4 @@ C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun
 C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\enemy.xnb
 C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\ShootingFun.csprojResolveAssemblyReference.cache
 C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\shot.xnb
+C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\explosion.xnb

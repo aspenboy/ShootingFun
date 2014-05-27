@@ -25,6 +25,7 @@ namespace ShootingFun
         private EnemyManager enemyManager;
         private ShotManager shotManager;
         private CollisionManager collisionManager;
+        private ExplosionManager explosionManager;
 
         private int score = 0;
 
@@ -63,7 +64,8 @@ namespace ShootingFun
             playerShip = new PlayerShip(shipTexture, new Vector2(xPositionOfShip, yPositionOfShip), playerBounds, shotManager);
             
             enemyManager = new EnemyManager(Content.Load<Texture2D>("enemy"), graphics.GraphicsDevice.Viewport.Bounds, shotManager);
-            collisionManager = new CollisionManager(playerShip, shotManager, enemyManager);
+            explosionManager = new ExplosionManager(Content.Load<Texture2D>("explosion"), graphics.GraphicsDevice.Viewport.Bounds);
+            collisionManager = new CollisionManager(playerShip, shotManager, enemyManager, explosionManager);
 
 
             gameFont = Content.Load<SpriteFont>("GameFont");
@@ -89,7 +91,7 @@ namespace ShootingFun
             playerShip.Update(gameTime);
             enemyManager.Update(gameTime);
             shotManager.Update(gameTime);
-
+            explosionManager.Update(gameTime);
             collisionManager.Update(gameTime);
 
             UpdateScore();
@@ -117,6 +119,7 @@ namespace ShootingFun
                 playerShip.Draw(spriteBatch);
             enemyManager.Draw(spriteBatch);
             shotManager.Draw(spriteBatch);
+            explosionManager.Draw(spriteBatch);
 
             var scoreText = string.Format("Score: {0}", score);
             var scoreDimensions = gameFont.MeasureString(scoreText);

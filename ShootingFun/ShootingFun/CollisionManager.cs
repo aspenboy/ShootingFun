@@ -11,12 +11,14 @@ namespace ShootingFun
         private readonly PlayerShip playerShip;
         private readonly ShotManager shotManager;
         private readonly EnemyManager enemyManager;
+        private readonly ExplosionManager explosionManager;
 
-        public CollisionManager(PlayerShip playerShip, ShotManager shotManager, EnemyManager enemyManager)
+        public CollisionManager(PlayerShip playerShip, ShotManager shotManager, EnemyManager enemyManager, ExplosionManager explosionManager)
         {
             this.playerShip = playerShip;
             this.shotManager = shotManager;
             this.enemyManager = enemyManager;
+            this.explosionManager = explosionManager;
         }
 
         public void Update(GameTime gameTime)
@@ -32,12 +34,18 @@ namespace ShootingFun
 
         private void CheckShotToEnemy()
         {
-            foreach (var shot in shotManager.PlayerShots)
+            for (int i = 0; i < shotManager.PlayerShots.Count(); i++)
             {
+                var shot = shotManager.PlayerShots[i];
                 foreach (var enemy in enemyManager.Enemies)
                 {
-                    if (shot.BoundingBox.Intersects(enemy.BoundingBox))
+                    if (!enemy.IsDead && shot.BoundingBox.Intersects(enemy.BoundingBox))
+                    {
                         enemy.Hit();
+                        if (enemy.IsDead)
+                            explosionManager.CreateExplosion(enemy);
+                        shotManager.RemovePlayerShot(shot);
+                    }
                 }
             }
         }
@@ -46,8 +54,12 @@ namespace ShootingFun
         {
             foreach (var shot in shotManager.EnemyShots)
             {
-                if (shot.BoundingBox.Intersects(playerShip.BoundingBox))
+                if (!playerShip.IsDead && shot.BoundingBox.Intersects(playerShip.BoundingBox))
+                {
                     playerShip.Hit();
+                    if (playerShip.IsDead)
+                        explosionManager.CreateExplosion(playerShip);
+                }
             }
         }
     }

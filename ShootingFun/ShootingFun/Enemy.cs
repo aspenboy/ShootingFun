@@ -14,7 +14,7 @@ namespace ShootingFun
 
         private const int ShotDelay = 1;
 
-        public Enemy(Texture2D texture, Vector2 position, Rectangle bounds, ShotManager shotManager) : base(texture, position, bounds)
+        public Enemy(Texture2D texture, Vector2 position, Rectangle bounds, ShotManager shotManager) : base(texture, position, bounds, 2, 2, 14)
         {
             this.shotManager = shotManager;
             Speed = 200;

@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\ship1.xnb</Output>
-      <Time>2014-05-26T10:41:41.7123061+02:00</Time>
+      <Time>2014-05-27T10:20:24.6411661+02:00</Time>
     </Item>
     <Item>
       <Source>enemy.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\enemy.xnb</Output>
-      <Time>2014-05-26T10:42:29.3990743+02:00</Time>
+      <Time>2014-05-27T14:47:26.9972415+02:00</Time>
     </Item>
     <Item>
       <Source>shot.png</Source>
@@ -44,7 +44,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\shot.xnb</Output>
-      <Time>2014-05-26T12:32:08.7821087+02:00</Time>
+      <Time>2014-05-27T14:49:33.7079113+02:00</Time>
+    </Item>
+    <Item>
+      <Source>explosion.png</Source>
+      <Name>explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\explosion.xnb</Output>
+      <Time>2014-05-27T16:05:24.7591119+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

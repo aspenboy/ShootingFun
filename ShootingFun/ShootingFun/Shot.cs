@@ -9,7 +9,7 @@ namespace ShootingFun
 {
     public class Shot : Sprite
     {
-        public Shot(Texture2D texture, Vector2 position, Rectangle movementBounds) : base(texture, position, movementBounds)
+        public Shot(Texture2D texture, Vector2 position, Rectangle movementBounds) : base(texture, position, movementBounds, 2, 2, 14)
         {
             Speed = 400;
         }
