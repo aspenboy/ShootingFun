@@ -7,6 +7,11 @@ C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun
 C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\ShootingFun.exe
 C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\ShootingFun.pdb
 C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\enemy.xnb
-C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\ShootingFun.csprojResolveAssemblyReference.cache
 C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\shot.xnb
 C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\explosion.xnb
+C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\sounds\explosion.xnb
+C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\sounds\laser.xnb
+C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\start.xnb
+C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\obj\x86\Debug\ShootingFun.csprojResolveAssemblyReference.cache
+C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\paused.xnb
+C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\gameover.xnb

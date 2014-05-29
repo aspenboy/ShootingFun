@@ -55,6 +55,51 @@
       <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\explosion.xnb</Output>
       <Time>2014-05-27T16:05:24.7591119+02:00</Time>
     </Item>
+    <Item>
+      <Source>start.png</Source>
+      <Name>start</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\start.xnb</Output>
+      <Time>2014-05-28T13:52:57.5908832+02:00</Time>
+    </Item>
+    <Item>
+      <Source>sounds\explosion.wav</Source>
+      <Name>sounds\explosion</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\sounds\explosion.xnb</Output>
+      <Time>2014-05-28T12:15:56.2848108+02:00</Time>
+    </Item>
+    <Item>
+      <Source>sounds\laser.wav</Source>
+      <Name>sounds\laser</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\sounds\laser.xnb</Output>
+      <Time>2014-05-28T12:15:56.3078131+02:00</Time>
+    </Item>
+    <Item>
+      <Source>paused.png</Source>
+      <Name>paused</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\paused.xnb</Output>
+      <Time>2014-05-28T15:22:36.3437047+02:00</Time>
+    </Item>
+    <Item>
+      <Source>gameover.png</Source>
+      <Name>gameover</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\tbilewicz\documents\visual studio 2013\Projects\ShootingFun\ShootingFun\ShootingFun\bin\x86\Debug\Content\gameover.xnb</Output>
+      <Time>2014-05-28T16:06:18.1298571+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{185B65E5-1833-44E6-8DA9-E38C9FCBFB40}</ContentProjectGUID>

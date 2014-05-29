@@ -7,13 +7,11 @@ using System.Text;
 
 namespace ShootingFun
 {
-    class EnemyManager
+    public class EnemyManager
     {
         private readonly Texture2D texture;
         private readonly Rectangle bounds;
         private List<Enemy> enemies = new List<Enemy>();
-        private Texture2D texture2D;
-        private Rectangle rectangle;
         private ShotManager shotManager;
 
         public EnemyManager(Texture2D texture, Rectangle bounds, ShotManager shotManager)

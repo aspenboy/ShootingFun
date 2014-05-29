@@ -4,3 +4,8 @@ Content\ship1.xnb
 Content\enemy.xnb
 Content\shot.xnb
 Content\explosion.xnb
+Content\start.xnb
+Content\sounds\explosion.xnb
+Content\sounds\laser.xnb
+Content\paused.xnb
+Content\gameover.xnb

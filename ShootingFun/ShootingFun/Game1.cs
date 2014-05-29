@@ -19,15 +19,23 @@ namespace ShootingFun
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        private Sprite titleScreen;
         private Sprite background;
+        private Sprite pauseScreen;
+        private Sprite gameOverScreen;
         private PlayerShip playerShip;
         private SpriteFont gameFont;
         private EnemyManager enemyManager;
         private ShotManager shotManager;
         private CollisionManager collisionManager;
         private ExplosionManager explosionManager;
+        private SoundManager soundManager;
+        private StatusManager statusManager;
 
-        private int score = 0;
+        private GameState gameState;
+
+        private KeyboardState currentKeyboardState;
+        private KeyboardState previousKeyboardState;
 
         public Game1()
         {
@@ -43,6 +51,7 @@ namespace ShootingFun
         /// </summary>
         protected override void Initialize()
         {
+            gameState = new TitleScreenState(this);
             base.Initialize();
         }
 
@@ -52,23 +61,30 @@ namespace ShootingFun
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            titleScreen = new Sprite(Content.Load<Texture2D>("start"), Vector2.Zero, graphics.GraphicsDevice.Viewport.Bounds, 2, 2, 8);
             background = new Sprite(Content.Load<Texture2D>("background"), Vector2.Zero, graphics.GraphicsDevice.Viewport.Bounds);
-            
+            pauseScreen = new Sprite(Content.Load<Texture2D>("paused"), Vector2.Zero, graphics.GraphicsDevice.Viewport.Bounds);
+            gameOverScreen = new Sprite(Content.Load<Texture2D>("gameover"), Vector2.Zero, graphics.GraphicsDevice.Viewport.Bounds);
+
+            soundManager = new SoundManager(Content);
+
             var shipTexture = Content.Load<Texture2D>("ship1");
             var xPositionOfShip = (graphics.GraphicsDevice.Viewport.Width / 2) - (shipTexture.Width / 2);
             var yPositionOfShip = graphics.GraphicsDevice.Viewport.Height - shipTexture.Height - 10;
             var playerBounds = new Rectangle(0, graphics.GraphicsDevice.Viewport.Height - 200, graphics.GraphicsDevice.Viewport.Width, 200);
-            shotManager = new ShotManager(Content.Load<Texture2D>("shot"), graphics.GraphicsDevice.Viewport.Bounds);
+            shotManager = new ShotManager(Content.Load<Texture2D>("shot"), graphics.GraphicsDevice.Viewport.Bounds, soundManager);
             playerShip = new PlayerShip(shipTexture, new Vector2(xPositionOfShip, yPositionOfShip), playerBounds, shotManager);
-            
             enemyManager = new EnemyManager(Content.Load<Texture2D>("enemy"), graphics.GraphicsDevice.Viewport.Bounds, shotManager);
-            explosionManager = new ExplosionManager(Content.Load<Texture2D>("explosion"), graphics.GraphicsDevice.Viewport.Bounds);
+            explosionManager = new ExplosionManager(Content.Load<Texture2D>("explosion"), graphics.GraphicsDevice.Viewport.Bounds, soundManager);
             collisionManager = new CollisionManager(playerShip, shotManager, enemyManager, explosionManager);
 
-
             gameFont = Content.Load<SpriteFont>("GameFont");
+            statusManager = new StatusManager(gameFont, graphics.GraphicsDevice.Viewport.Bounds, enemyManager, shipTexture)
+            {
+                Lives = 3,
+                Score = 0
+            };
         }
 
         /// <summary>
@@ -87,22 +103,10 @@ namespace ShootingFun
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            //var keyboardState = Keyboard.GetState();
-            playerShip.Update(gameTime);
-            enemyManager.Update(gameTime);
-            shotManager.Update(gameTime);
-            explosionManager.Update(gameTime);
-            collisionManager.Update(gameTime);
-
-            UpdateScore();
- 
+            currentKeyboardState = Keyboard.GetState();
+            gameState.Update(gameTime);
+            previousKeyboardState = currentKeyboardState;
             base.Update(gameTime);
-        }
-
-        private void UpdateScore()
-        {
-            var kills = enemyManager.GetKillCount();
-            score += (kills * 1000);
         }
 
         /// <summary>
@@ -114,24 +118,139 @@ namespace ShootingFun
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            background.Draw(spriteBatch);
-            if (!playerShip.IsDead)
-                playerShip.Draw(spriteBatch);
-            enemyManager.Draw(spriteBatch);
-            shotManager.Draw(spriteBatch);
-            explosionManager.Draw(spriteBatch);
 
-            var scoreText = string.Format("Score: {0}", score);
-            var scoreDimensions = gameFont.MeasureString(scoreText);
-
-            var scoreX = graphics.GraphicsDevice.Viewport.Width - scoreDimensions.X - 5;
-            var scoreY = 5;
-
-            spriteBatch.DrawString(gameFont, scoreText, new Vector2(scoreX, scoreY), Color.White);
+            gameState.Draw(spriteBatch);
 
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+
+        public class TitleScreenState : GameState
+        {
+            public TitleScreenState(Game1 game)
+                : base(game)
+            {
+            }
+
+            public override void Update(GameTime gameTime)
+            {
+                game.titleScreen.Update(gameTime);
+                if (game.currentKeyboardState.IsKeyDown(Keys.Space) && !game.previousKeyboardState.IsKeyDown(Keys.Space))
+                    game.gameState = new PlayingState(game);
+
+            }
+
+            public override void Draw(SpriteBatch spriteBatch)
+            {
+                game.titleScreen.Draw(spriteBatch);
+            }
+        }
+
+        public class PlayingState : GameState
+        {
+            public PlayingState(Game1 game)
+                : base(game)
+            {
+            }
+
+            public override void Update(GameTime gameTime)
+            {
+                game.playerShip.Update(gameTime);
+                game.enemyManager.Update(gameTime);
+                game.shotManager.Update(gameTime);
+                game.explosionManager.Update(gameTime);
+                game.collisionManager.Update(gameTime);
+                game.statusManager.UpdateScore();
+
+                if (game.currentKeyboardState.IsKeyDown(Keys.P))
+                    game.gameState = new PausedState(game);
+
+                if (game.playerShip.IsDead)
+                {
+                    game.statusManager.Lives--;
+                    if (game.statusManager.Lives < 1)
+                        game.gameState = new GameOverState(game);
+                    else
+                        game.playerShip.IsDead = false;
+                }
+            }
+
+            public override void Draw(SpriteBatch spriteBatch)
+            {
+                game.background.Draw(spriteBatch);
+                if (!game.playerShip.IsDead)
+                    game.playerShip.Draw(spriteBatch);
+                game.statusManager.Draw(spriteBatch);
+                game.enemyManager.Draw(spriteBatch);
+                game.shotManager.Draw(spriteBatch);
+                game.explosionManager.Draw(spriteBatch);
+            }
+        }
+
+        public class PausedState : PlayingState
+        {
+            public PausedState(Game1 game)
+                : base(game)
+            {
+            }
+
+            public override void Update(GameTime gameTime)
+            {
+                game.pauseScreen.Update(gameTime);
+                if (game.currentKeyboardState.IsKeyDown(Keys.Space) && !game.previousKeyboardState.IsKeyDown(Keys.Space))
+                    game.gameState = new PlayingState(game);
+            }
+
+            public override void Draw(SpriteBatch spriteBatch)
+            {
+                base.Draw(spriteBatch);
+                game.pauseScreen.Draw(spriteBatch);
+            }
+
+        }
+
+        public class GameOverState : PlayingState
+        {
+            public GameOverState(Game1 game)
+                : base(game)
+            {
+            }
+
+            public override void Update(GameTime gameTime)
+            {
+                base.Update(gameTime);
+                game.gameOverScreen.Update(gameTime);
+
+                if (game.currentKeyboardState.IsKeyDown(Keys.Space))
+                {
+                    game.LoadContent();
+                    game.gameState = new TitleScreenState(game);
+                }
+            }
+
+            public override void Draw(SpriteBatch spriteBatch)
+            {
+                base.Draw(spriteBatch);
+                game.gameOverScreen.Draw(spriteBatch);
+            }
+
+        }
+
     }
+
+    public abstract class GameState
+    {
+        protected readonly Game1 game;
+        public GameState(Game1 game)
+        {
+            this.game = game;
+        }
+
+        public abstract void Update(GameTime gameTime);
+        public abstract void Draw(SpriteBatch spriteBatch);
+    }
+
+
 }

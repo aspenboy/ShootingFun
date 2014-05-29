@@ -13,11 +13,13 @@ namespace ShootingFun
         private readonly Rectangle bounds;
         private List<Shot> enemyShots = new List<Shot>();
         private List<Shot> playerShots = new List<Shot>();
+        private readonly SoundManager soundManager;
 
-        public ShotManager(Texture2D texture, Rectangle bounds)
+        public ShotManager(Texture2D texture, Rectangle bounds, SoundManager soundManager)
         {
             this.texture = texture;
             this.bounds = bounds;
+            this.soundManager = soundManager;
         }
 
         private IEnumerable<Shot> AllShots
@@ -28,7 +30,7 @@ namespace ShootingFun
             }
         }
 
-        public IEnumerable<Shot> EnemyShots
+        public IList<Shot> EnemyShots
         {
             get { return enemyShots; }
         }
@@ -69,6 +71,7 @@ namespace ShootingFun
             var shot = new Shot(texture, shotPosition, inflatedBounds);
             shot.Velocity = new Vector2(0, yDirection);
             shotList.Add(shot);
+            soundManager.PlayShotSound();
         }
 
         public void FireEnemyShot(Vector2 shotPosition)
@@ -84,6 +87,11 @@ namespace ShootingFun
         public void RemovePlayerShot(Shot shot)
         {
             playerShots.Remove(shot);
+        }
+
+        public void RemoveEnemyShot(Shot shot)
+        {
+            enemyShots.Remove(shot);
         }
     }
 }

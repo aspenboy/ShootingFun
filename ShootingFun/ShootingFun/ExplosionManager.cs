@@ -12,11 +12,13 @@ namespace ShootingFun
         private readonly Texture2D texture;
         private readonly Rectangle bounds;
         private List<Explosion> explosions = new List<Explosion>();
+        private readonly SoundManager soundManager;
 
-        public ExplosionManager(Texture2D texture, Rectangle bounds)
+        public ExplosionManager(Texture2D texture, Rectangle bounds, SoundManager soundManager)
         {
             this.texture = texture;
             this.bounds = bounds;
+            this.soundManager = soundManager;
         }
 
         public void CreateExplosion(Sprite sprite)
@@ -25,6 +27,7 @@ namespace ShootingFun
             var explosion = new Explosion(texture, centerOfSprite, bounds);
             explosion.Position -= new Vector2(explosion.Width / 2, explosion.Height / 2);
             explosions.Add(explosion);
+            soundManager.PlayExplosionSound();
         }
 
         public void Update(GameTime gameTime)

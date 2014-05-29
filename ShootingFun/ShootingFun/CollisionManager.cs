@@ -52,13 +52,15 @@ namespace ShootingFun
 
         private void CheckShotToPlayer()
         {
-            foreach (var shot in shotManager.EnemyShots)
+            for (int i = 0; i < shotManager.EnemyShots.Count(); i++)
             {
+                var shot = shotManager.EnemyShots[i];
                 if (!playerShip.IsDead && shot.BoundingBox.Intersects(playerShip.BoundingBox))
                 {
                     playerShip.Hit();
                     if (playerShip.IsDead)
                         explosionManager.CreateExplosion(playerShip);
+                    shotManager.RemoveEnemyShot(shot);
                 }
             }
         }

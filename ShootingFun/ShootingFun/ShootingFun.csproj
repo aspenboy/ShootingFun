@@ -83,7 +83,9 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Shot.cs" />
     <Compile Include="ShotManager.cs" />
+    <Compile Include="SoundManager.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="StatusManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ShootingFun
 {
-    class Enemy : Sprite
+    public class Enemy : Sprite
     {
         private readonly ShotManager shotManager;
         private double timeSinceLastShot;

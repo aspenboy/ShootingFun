@@ -100,6 +100,6 @@ namespace ShootingFun
             IsDead = true;
         }
 
-        public bool IsDead { get; private set; }
+        public bool IsDead { get; set; }
     }
 }
